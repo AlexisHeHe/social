@@ -1,0 +1,43 @@
+.authorSocial{
+  display: flex;
+  position: absolute;
+  right:100px;
+  top: 100px;
+}
+
+.following{
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.followers{
+  border-right: 2px solid black;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.createForm{
+  text-align: center;
+}
+
+.createForm input{
+  margin: 10px;
+}
+
+textarea{
+  margin: 10px;
+}
+
+.authorPosts{
+  width:300px;
+  padding: 20px;
+  position: absolute;
+  left: 40px;
+  top: 75px;
+}
+
+.authorPosts h2{
+  padding-left: 90px;
+}

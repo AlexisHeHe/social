@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./reusedjs/header.ejs') %>
+<body>
+  <%- include('./reusedjs/navbar.ejs') %>
+  <% if(info.username){ %>
+    <p><%= info.username %></p>
+    <% }else{ %>
+      <h1>Logged out</h1>
+      <h3>Click <a href="/login">here</a> to Log in or <a href="/signup"> here</a> to sign up</h3>
+      <% } %>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6 bg-secondary" style="text-align: center;">
+            <span class="text-uppercase fw-bold fs-1"><%= info.username %></span><br>
+            <i class="fa-regular fa-user text-white" style="font-size: 200px;"></i><br><br>
+            <p >User ID #<%= info.userID %></p>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

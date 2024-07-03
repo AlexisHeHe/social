@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./reusedjs/header.ejs') %>
+<body>
+  <%- include('./reusedjs/navbar.ejs') %>
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 bg-secondary" style="text-align: center;">
+        <span class="text-uppercase fw-bold fs-1"><%= posts.username %></span><br>
+        <i class="fa-regular fa-user text-white" style="font-size: 200px;"></i><br><br>
+        <p >User ID #<%= posts._id %></p>
+        <button class="btn btn-primary m-2" data-ident="<%= posts._id %>" id="follow">Follow</button>
+        <button class="btn btn-danger" data-ident="<%= posts._id %>" id="unfollow">Unfollow</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="authorPosts">
+    <h2><u>Posts'</u></h2>
+    <% ap.forEach(post => { %>
+      <div class="bg-secondary">
+        <div style="border: 4px solid black; border-radius: 10px; margin: 5px;">
+          <h4 class="ps-3 text-uppercase fs-bold" style="-webkit-text-stroke: 1px;"><%= post.topic %></h4>
+          <p class="ps-3 text-white fs-bold" style="-webkit-text-stroke: 0.1px black;"><%= post.body %></p>
+        </div>
+      </div>
+   <% })  %>
+  </div>
+
+  <div class="authorSocial">
+    <div class="following">
+      <p>Following: <%= posts.following.length %></p>
+      <% posts.following.forEach(element => { %>
+        <p> <%= element %> </p>
+    <%  }); %>
+    </div>
+
+    <div class="followers">
+      <p>Followers: <%= posts.followers.length %></p>
+      <% posts.followers.forEach(element => { %>
+        <p> <%= element %> </p>
+    <%  }); %>
+    </div>
+  </div>
+  <script>
+
+    const follow = document.getElementById('follow');
+    const unfollow = document.getElementById('unfollow');
+    follow.addEventListener('click', (e) => {
+        if(follow.style.display != 'none'){
+        follow.style.display = 'none';
+          unfollow.style.display = 'inline-block';
+         }
+      let url = `/follow/${follow.dataset.ident}`;
+      fetch(url, {method: 'PATCH'}).then(result => result.json()).then(data => {if(data.alr == "true"){
+        alert('You already follow this person');
+      }}).catch(err => console.log(err));
+    })
+
+    unfollow.addEventListener('click', (e) => {
+          if(unfollow.style.display != 'none'){
+        unfollow.style.display = 'none';
+        follow.style.display = 'inline-block';
+        }
+      let url = `/unfollow/${unfollow.dataset.ident}`;
+      fetch(url, {method: 'PATCH'}).then(result => result.json()).then(data => {if(data.alr == "true"){
+        alert('You Already Do Not Follow this User');
+      }}).catch(err => console.log(err));
+      })
+  </script>
+
+</body>
+</html>

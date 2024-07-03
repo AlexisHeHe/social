@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./reusedjs/header.ejs') %>
+<body>
+  <%- include('./reusedjs/navbar.ejs') %>
+  <% if(info.username){ %>
+    <p><%= info.username %></p>
+    <form action="/createp" method="post" class="createForm">
+      <input type="text" name="author" id="author" placeholder="Author">
+      <input type="text" name="topic" id="topic" placeholder="Title"><br>
+      <textarea name="body" id="body" cols="24" rows="3" placeholder="Type Post Here..."></textarea>
+      <input type="text" name="filter" id="filter" placeholder="Any Filters"><br>
+      <input type="submit" value="Create">
+    </form>
+    <% }else{ %>
+      <p>Must be logged in to create a post!</p>
+      <h3>Click <a href="/login">here</a> to Log in or <a href="/signup"> here</a> to sign up</h3>
+      <% } %>
+
+</body>
+</html>

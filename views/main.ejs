@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./reusedjs/header.ejs') %>
+<body style="padding-bottom: 500px;">
+  <%- include('./reusedjs/navbar.ejs') %>
+  <% if(info.username){ %>
+    <p><%= info.username %></p>
+
+    <% }else{ %>
+      <p class="m-2">Logged out</p>
+      <% } %>
+      <div class="container">
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8 bg-secondary text-secondary">
+            <a href="#"><button>Explore</button></a>
+            <% if(!info.username){ %>
+            <a href="#" ><button disabled>Following</button></a>
+            <% }else{ %>
+            <a href="/following" ><button>Following</button></a>
+            <% } %>
+        </div>
+      </div>
+    <% if(posts.length > 0){ %>
+    <% posts.forEach(post => { %>
+        <div class="container" style="text-align: left;">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 bg-secondary">
+              <div style="border: 4px solid black; border-radius: 10px; margin: 5px;">
+                <h4 class="ps-3 text-uppercase fs-bold" style="-webkit-text-stroke: 1px;"><%= post.topic %></h4>
+                <p class="ps-3 text-white fs-bold" style="-webkit-text-stroke: 0.1px black;"><%= post.body %></p>
+                <a href="/profile/<%= post.authorID %>"><p class="ps-3 text-white fs-bold">By: <%= post.author %></p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <%  }); %> 
+    <% }else{ %>
+      <p>No Posts</p>
+    <% } %>
+
+    <form action="/filter" method="post" style="position: fixed; right:30px; top: 20%; text-align: center;">
+      <h3>Filter Posts</h3>
+      <input type="text" name="filter" id="filter" placeholder="e.g. 'Gaming'" style="border: 2px solid black; margin-bottom: 5px;"><br>
+      <input type="submit" value="Search" class="btn btn-primary">
+    </form>
+
+    <script></script>
+</body>
+</html>
